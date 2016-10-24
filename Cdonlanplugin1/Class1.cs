@@ -19,7 +19,7 @@ namespace Cdonlanplugin1
             IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
             IOrganizationService orgService = serviceFactory.CreateOrganizationService(context.UserId);
 
-
+           
             trace.Trace("Fired");
 
             try
@@ -29,27 +29,56 @@ namespace Cdonlanplugin1
                 if (context.InputParameters.Contains("Target") && context.InputParameters["Target"] is Entity)
                 {
                     Entity entity = (Entity)context.InputParameters["Target"];
-                    Entity postEntity = (Entity)context.PostEntityImages["AccountUpdate"];
+
+                    trace.Trace("Target contains " + entity.Attributes.Count.ToString() + " attributes");
+
+
+                    //Try to get fax field
+                    //if (entity.Attributes.Contains("fax") && entity.Attributes["fax"] != null)
+                    //    trace.Trace("Target contains Fax Attribute: " + entity.Attributes["fax"]);
+                    //else
+                    //    trace.Trace("Target doesnt contain Fax attribute"); 
+
                     Entity preEntity = (Entity)context.PreEntityImages["AccountUpdate"];
+                    if (preEntity != null)
+                        trace.Trace("Pre entity contains " + preEntity.Attributes.Count.ToString() +" attribute");
 
-                   if(postEntity.Attributes.Contains("fax") && preEntity.Attributes.Contains("fax"))
-                    {
-                        postEntity.Attributes["fax"].ToString();
-                        trace.Trace("pre entity fax is: " + preEntity.Attributes["fax"].ToString());
-                        trace.Trace("pre entity fax is: " + postEntity.Attributes["fax"].ToString());  
-                    }
-                    else
-                    {
-                        trace.Trace("entity doesnt contain fax field");
-                    }
+                    Entity postEntity = (Entity)context.PostEntityImages["AccountUpdate"];
+                    if (postEntity != null)
+                        trace.Trace("Post entity contains " + postEntity.Attributes.Count.ToString() + " attributes");
 
-                   try
-                    {
-                        Entity task = new Entity("task");
-                        //task.Attributes[""]
-                
 
-                        
+
+                    //if (postEntity.Attributes.Contains("fax") && preEntity.Attributes.Contains("fax"))
+                    //{
+                    //    string foo = postEntity.Attributes["fax"].ToString();
+                    //    trace.Trace("pre entity fax is: " + preEntity.Attributes["fax"].ToString());
+                    //    trace.Trace("pre entity fax is: " + postEntity.Attributes["fax"].ToString());
+                    //}
+                    //else
+                    //{
+                    //    trace.Trace("entity doesnt contain fax field");
+
+                    //}
+
+                    try
+                    {
+                        //Update entity description
+                       entity["description"] = "Updated in plugin";
+                       trace.Trace("updated description");
+
+                        //if (context.OutputParameters.Contains("id"))
+                        //{
+                        //    trace.Trace("Target id is " + context.OutputParameters.Contains("id"));
+
+                          
+                        //}
+                        //else
+                        //{
+                        //    trace.Trace("Target id is NULL");
+                        //}
+
+
                     }
                     catch(FaultException<OrganizationServiceFault> ex)
                     {

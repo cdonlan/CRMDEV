@@ -21,7 +21,8 @@ namespace WebAPI
         static void Main(string[] args)
         {
 
-            string clientId = "2cffaf60-f880-4142-b4b7-ace5cfb3916c";
+            //string clientId = "2cffaf60-f880-4142-b4b7-ace5cfb3916c";
+            string clientId = "5062951f-8b2a-4c24-8d09-6a9630ba624f";
             string redirectUrl = "https://cdonlanv9.crm.dynamics.com/foo";
             string resource = "https://cdonlanv9.crm.dynamics.com/";
 
