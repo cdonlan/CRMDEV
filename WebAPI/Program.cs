@@ -22,12 +22,12 @@ namespace WebAPI
         {
 
             //string clientId = "2cffaf60-f880-4142-b4b7-ace5cfb3916c";
-            string clientId = "5062951f-8b2a-4c24-8d09-6a9630ba624f";
-            string redirectUrl = "https://cdonlanv9.crm.dynamics.com/foo";
-            string resource = "https://cdonlanv9.crm.dynamics.com/";
+            string clientId = "c14d7af3-7b54-486a-a119-9b09f5caf236";
+            string redirectUrl = "https://cmdonlan.crm.dynamics.com/foo";
+            string resource = "https://cmdonlan.crm.dynamics.com/";
 
-            const string _username = "admin@cdonlanv9.onmicrosoft.com";
-            const string _password = "pass@word2";
+            const string _username = "admin@cmdonlan.onmicrosoft.com";
+            const string _password = "pass@word1";
             UserCredential creds = new UserCredential(_username, _password);
 
             AuthenticationContext authContext = new AuthenticationContext("https://login.windows.net/common", false);
@@ -44,13 +44,17 @@ namespace WebAPI
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri("https://cdonlanv9.api.crm.dynamics.com/");
+                httpClient.BaseAddress = new Uri("https://cmdonlan.crm.dynamics.com/");
                 httpClient.Timeout = new TimeSpan(0, 2, 0);
+                httpClient.DefaultRequestHeaders.Add("OData-MaxVersion", "4.0");
+                httpClient.DefaultRequestHeaders.Add("OData-Version", "4.0");
+                httpClient.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 //Get Accounts
                 HttpResponseMessage whoAmIResponse =
-                    await httpClient.GetAsync("/api/data/v8.0/accounts");
+                    await httpClient.GetAsync("/api/data/v8.2/accounts");
                
                 if (whoAmIResponse.IsSuccessStatusCode)
                 {
