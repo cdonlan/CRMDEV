@@ -52,7 +52,9 @@ namespace Microsoft.Crm.Sdk.Samples
             table.CreateIfNotExists();
 
             ForeignLead crmLead = new ForeignLead(leadId, fullName);
+
             TableOperation insertOperation = TableOperation.Insert(crmLead);
+
             table.Execute(insertOperation);
         }
 

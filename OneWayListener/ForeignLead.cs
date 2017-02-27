@@ -15,9 +15,11 @@ namespace OneWayListener
         {
             this.PartitionKey = id;
             this.RowKey = fullname;
+
         }
 
         public ForeignLead() { }
+
 
         public string ID { get; set; }
 

@@ -45,7 +45,6 @@ namespace CRMIntegration
                 {
                     Entity entity = new Entity("account");
                     entity["name"] = "Execute Multiple Record " + i;
-
                     requestCollection.Add(new CreateRequest { Target = entity });
                 }
 
